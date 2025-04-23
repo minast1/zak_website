@@ -39,7 +39,7 @@ export default function LogInCard() {
   const signWithGoogle = async () => {
     const isOk = await signInWithGoogle();
 
-    if (isOk) router.push("/dashboard");
+    if (isOk) router.push("/zachary-online/v1/dashboard");
   };
   /**
    * Function for logging in with email and password
@@ -47,11 +47,15 @@ export default function LogInCard() {
    * @param password Password for logging in
    */
   const logInWithEmailAndPassword = async (email: string, password: string) => {
-    const isOk = await signInWithEmailAndPasswordAuth(email, password);
-    if (isOk) router.push("/dashboard");
+    try {
+      const isOk = await signInWithEmailAndPasswordAuth(email, password);
+      if (isOk) router.push("/zachary-online/v1/dashboard");
+    } catch (error: any) {
+      console.log(error.code);
+    }
   };
   return (
-    <Card className="w-full max-w-md sm:mx-0 mx-4">
+    <Card className="w-full max-w-md sm:mx-0 mx-4 shadow-lg">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>

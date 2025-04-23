@@ -23,37 +23,24 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardDescription,
-} from "@/components/ui/card";
-import {
-  Table,
-  TableHeader,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableCell,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+
 import { JSX, SVGProps } from "react";
 import { signOut } from "@/lib/firebase/auth";
 import { useRouter } from "next/navigation";
-import { User } from "lucide-react";
+import { Edit, EditIcon, User } from "lucide-react";
+import PostEditor from "./post-editor";
 
 export default function DashboardMock() {
   const router = useRouter();
   const handleSignOut = async () => {
     const isOk = await signOut();
 
-    if (isOk) router.push("/log-in");
+    if (isOk) router.push("/zachary-online/v1/log-in");
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-muted/40">
+    <div className="flex min-h-screen w-full flex-col bg-sky-100">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
           <TooltipProvider>
@@ -220,6 +207,7 @@ export default function DashboardMock() {
               </nav>
             </SheetContent>
           </Sheet>
+
           <Breadcrumb className="hidden md:flex">
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -323,14 +311,28 @@ export default function DashboardMock() {
           </div>
           <div>
             <Card>
-              <CardHeader className="px-7">
-                <CardTitle>Recent Orders</CardTitle>
-                <CardDescription>
-                  View and manage your recent orders.
-                </CardDescription>
+              <CardHeader className="px-6 border-b border-gray-200 py-4">
+                <Button
+                  size={"sm"}
+                  variant="secondary"
+                  className="self-end gap-1 text-xs"
+                >
+                  Create New Post
+                  <EditIcon className="h-4 w-4" />
+                </Button>
+              </CardHeader>
+              <CardContent></CardContent>
+            </Card>
+          </div>
+          <div>
+            <Card className="shadow-xl">
+              <CardHeader className="px-6 border-b border-gray-200 py-4">
+                <CardTitle className="font-bold text-xl text-gray-800">
+                  Create New Post
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <Table>
+                {/* <Table>
                   <TableHeader>
                     <TableRow>
                       <TableHead>Customer</TableHead>
@@ -419,7 +421,8 @@ export default function DashboardMock() {
                       </TableCell>
                     </TableRow>
                   </TableBody>
-                </Table>
+                </Table> */}
+                <PostEditor />
               </CardContent>
             </Card>
           </div>
@@ -430,7 +433,7 @@ export default function DashboardMock() {
 }
 
 function ActivityIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>,
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
 ) {
   return (
     <svg
@@ -470,7 +473,7 @@ function CommandIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
 }
 
 function CreditCardIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>,
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
 ) {
   return (
     <svg
@@ -492,7 +495,7 @@ function CreditCardIcon(
 }
 
 function DollarSignIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>,
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
 ) {
   return (
     <svg
@@ -535,7 +538,7 @@ function InfoIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
 }
 
 function LayoutDashboardIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>,
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
 ) {
   return (
     <svg
@@ -580,7 +583,7 @@ function MenuIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
 }
 
 function MountainIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>,
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
 ) {
   return (
     <svg
@@ -621,7 +624,7 @@ function SearchIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
 }
 
 function SettingsIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>,
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
 ) {
   return (
     <svg

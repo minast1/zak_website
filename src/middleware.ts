@@ -4,17 +4,26 @@ import { NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const session = request.cookies.get("__session")?.value;
 
-  if (session && !request.nextUrl.pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
-
+  // Redirect the user to the home page if not logged in
   if (
     !session &&
-    !request.nextUrl.pathname.startsWith("/log-in") &&
-    !request.nextUrl.pathname.startsWith("/sign-up")
+    request.nextUrl.pathname.includes("/zachary-online/v1/dashboard")
   ) {
-    return NextResponse.redirect(new URL("/log-in", request.url));
+    return NextResponse.redirect(
+      new URL("/zachary-online/v1/log-in", request.url)
+    );
   }
+  // if (session && !request.nextUrl.pathname.startsWith("/zachary-online")) {
+  //   return NextResponse.redirect(new URL("/zachary-online/v1/dashboard", request.url));
+  // }
+
+  // if (
+  //   !session &&
+  //   !request.nextUrl.pathname.includes("/zachary-online/v1/log-in") &&
+  //   !request.nextUrl.pathname.startsWith("/sign-up")
+  // ) {
+  //   return NextResponse.redirect(new URL("/", request.url));
+  // }
 }
 
 export const config = {

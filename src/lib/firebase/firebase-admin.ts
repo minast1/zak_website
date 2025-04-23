@@ -4,19 +4,36 @@ import { cookies } from "next/headers";
 
 import { initializeApp, getApps, cert } from "firebase-admin/app";
 import { SessionCookieOptions, getAuth } from "firebase-admin/auth";
+import { getStorage } from "firebase-admin/storage";
+import { getFirestore } from "firebase-admin/firestore";
+
+function formatPrivateKey(key: string) {
+  return key.replace(/\\n/g, "\n");
+}
 
 export const firebaseApp =
   getApps().find((it) => it.name === "firebase-admin-app") ||
   initializeApp(
     {
-      credential: cert(process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT as string),
+      credential: cert({
+        projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: formatPrivateKey(
+          process.env.FIREBASE_PRIVATE_KEY as string
+        ),
+      }),
+      storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
     },
-    "firebase-admin-app",
+    "firebase-admin-app"
   );
 export const auth = getAuth(firebaseApp);
+export const storage = getStorage(firebaseApp).bucket(
+  process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+);
+export const db = getFirestore(firebaseApp);
 
 export async function isUserAuthenticated(
-  session: string | undefined = undefined,
+  session: string | undefined = undefined
 ) {
   const _session = session ?? (await getSession());
   if (!_session) return false;
@@ -53,7 +70,7 @@ async function getSession() {
 
 export async function createSessionCookie(
   idToken: string,
-  sessionCookieOptions: SessionCookieOptions,
+  sessionCookieOptions: SessionCookieOptions
 ) {
   return auth.createSessionCookie(idToken, sessionCookieOptions);
 }

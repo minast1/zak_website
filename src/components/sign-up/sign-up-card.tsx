@@ -39,7 +39,7 @@ export default function SignInCard() {
   const signWithGoogle = async () => {
     const isOk = await signInWithGoogle();
 
-    if (isOk) router.push("/dashboard");
+    if (isOk) router.push("/zachary-online/v1/dashboard");
   };
 
   /**
@@ -47,11 +47,11 @@ export default function SignInCard() {
    */
   const createUserWithEmailPassword = async (
     password: string,
-    email: string,
+    email: string
   ) => {
     const isOk = await createUserWithEmailAndPasswordAuth(password, email);
 
-    if (isOk) router.push("/dashboard");
+    if (isOk) router.push("/zachary-online/v1/dashboard");
   };
   return (
     <Card className="w-full max-w-md sm:mx-0 mx-4">
