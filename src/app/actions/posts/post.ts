@@ -97,6 +97,7 @@ export const createPost = actionClient
         label: label ? label : "",
       };
       await db.collection("posts").doc().set(post);
+      revalidatePath("/");
     }
 
     if (file) {
@@ -113,6 +114,7 @@ export const createPost = actionClient
           image: filename,
         };
         await db.collection("posts").doc(filename).set(post);
+        revalidatePath("/");
       } catch (error) {
         console.error("Error saving post to database", error);
       }
@@ -218,7 +220,7 @@ export const bulkDeletePosts = actionClient
       }
       await post.delete();
     }
-    revalidatePath("/zachary-online/v1/dashboard", "page");
+    revalidatePath("/");
   });
 
 export const fetchTotalPosts = async () => {
