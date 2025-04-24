@@ -7,10 +7,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { EditIcon } from "lucide-react";
 import Link from "next/link";
+import { Post } from "@/lib/types/types";
 
-export const columns: ColumnDef<DocumentData>[] = [
+export const columns: ColumnDef<Post>[] = [
   {
-    id: "select",
+    id: "id",
     maxSize: 10,
     header: ({ table }) => (
       <Checkbox

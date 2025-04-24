@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import DataTable from "@/components/ui/data-table";
 import { EditIcon } from "lucide-react";
+import Link from "next/link";
 
 export default async function HiddenDashbaordPage() {
   const posts = await fetchPosts();
@@ -14,9 +15,11 @@ export default async function HiddenDashbaordPage() {
       <div>
         <Card>
           <CardHeader className="px-6 border-b border-gray-200 py-4">
-            <Button size={"sm"} className="gap-1 text-xs max-w-fit">
-              Create New Post
-              <EditIcon className="h-4 w-4" />
+            <Button asChild size={"sm"} className="gap-1 text-xs max-w-fit">
+              <Link href="/zachary-online/v1/dashboard/create" prefetch={true}>
+                Create New Post
+                <EditIcon className="h-4 w-4" />
+              </Link>
             </Button>
           </CardHeader>
           <CardContent className="py-6">
@@ -24,18 +27,6 @@ export default async function HiddenDashbaordPage() {
           </CardContent>
         </Card>
       </div>
-      {/* <div>
-        <Card className="shadow-xl">
-          <CardHeader className="px-6 border-b border-gray-200 py-4">
-            <CardTitle className="font-bold text-xl text-gray-800">
-              Create New Post
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <PostEditor />
-          </CardContent>
-        </Card>
-      </div> */}
     </main>
   );
 }

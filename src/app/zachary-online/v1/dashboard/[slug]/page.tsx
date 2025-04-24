@@ -13,7 +13,7 @@ export default async function PostEditPage({
 }) {
   const { slug } = await params;
   const post = await fetchPostBySlug(slug);
-  console.log(post);
+  // console.log(post);
   return (
     <main className="space-y-10">
       <div>
@@ -28,6 +28,7 @@ export default async function PostEditPage({
           </CardHeader>
           <CardContent>
             <EditPostForm
+              id={slug}
               title={post.title}
               post={post.content}
               label={post.label}

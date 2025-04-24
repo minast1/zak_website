@@ -5,3 +5,13 @@ export type APIResponse<T = object> =
 export interface PreviewFile extends File {
   preview: string;
 }
+
+export interface Post {
+  id: string;
+  title: string;
+  content: string;
+  createdAt: string;
+  tags: string[];
+  label: string;
+  image: string;
+}

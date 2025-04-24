@@ -19,11 +19,16 @@ const PostEditor = () => {
       console.log(error);
     },
     onSuccess: (data) => {
+      formRef.current?.reset();
+      setFile([]);
+      setPreviewFile([]);
+      setContent("");
       toast.success("Post created successfully", {
         description: format(new Date(), "EEEE, MMMM dd, yyyy 'at' h:mm a"),
       });
     },
   });
+  const formRef = React.useRef<HTMLFormElement>(null);
   const [file, setFile] = React.useState<File[]>([]);
   const [previewFile, setPreviewFile] = React.useState<PreviewFile[]>([]);
   const [content, setContent] = React.useState("");
@@ -61,7 +66,7 @@ const PostEditor = () => {
     execute(formData);
   };
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} ref={formRef}>
       <div className="px-6 py-6 space-y-6">
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">Title</label>

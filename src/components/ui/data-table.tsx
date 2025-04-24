@@ -22,6 +22,8 @@ import { DataTablePagination } from "../dashboard/posts-table/pagination";
 import DebouncedSearchInput from "../dashboard/posts-table/debounced-searchinput";
 import { Button } from "./button";
 import { Trash2 } from "lucide-react";
+import { useAction } from "next-safe-action/hooks";
+import { bulkDeletePosts } from "@/app/actions/posts/post";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -42,10 +44,12 @@ const DataTable = <TData, TValue>({
     []
   );
   const [rowSelection, setRowSelection] = React.useState({});
+  const { execute, status } = useAction(bulkDeletePosts);
   const table = useReactTable({
     data,
     columns,
     //enableColumnFilters: false,
+    getRowId: (row) => (row as any).id,
     getCoreRowModel: getCoreRowModel(),
     onColumnFiltersChange: setDateColumnFilters,
     onGlobalFilterChange: setGlobalFilter,
@@ -68,9 +72,19 @@ const DataTable = <TData, TValue>({
           placeholder="Search Posts..."
         />
         {table.getSelectedRowModel().rows.length > 0 && (
-          <Button size={"sm"} variant="destructive">
-            <Trash2 className="mr-2 h-4 w-4" />
-            Delete Selected Rows
+          <Button
+            size={"sm"}
+            variant="destructive"
+            onClick={() => execute({ ids: Object.keys(rowSelection) })}
+          >
+            {status === "executing" ? (
+              "Deleting..."
+            ) : (
+              <>
+                <Trash2 className="mr-2 h-4 w-4" />
+                Delete Selected Rows
+              </>
+            )}
           </Button>
         )}
       </div>

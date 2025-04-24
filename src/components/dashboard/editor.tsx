@@ -52,7 +52,7 @@ const extensions = [
 
 type Props = {
   content: string;
-  setContent: (value: string) => void;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const RTEditor = ({ content, setContent }: Props) => {
