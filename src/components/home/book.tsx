@@ -10,15 +10,21 @@ import HTMLFlipBook from "react-pageflip";
 //         </div>
 //     );
 // })
-const FlipBookWrapper = () => {
+const Book = React.forwardRef((props, ref) => {
   return (
-    <HTMLFlipBook width={300} height={500} className="shadow-lg">
+    <HTMLFlipBook
+      ref={ref}
+      width={500}
+      height={600}
+      maxShadowOpacity={0.5}
+      className="shadow-lg"
+    >
       <div className="page bg-red-200 p-4">Page 1</div>
       <div className="page bg-white p-4">Page 2</div>
       <div className="page bg-white p-4">Page 3</div>
       <div className="page bg-white p-4">Page 4</div>
     </HTMLFlipBook>
   );
-};
+});
 
-export default FlipBookWrapper;
+export default Book;

@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
 import { Toaster } from "@/components/ui/sonner";
+import Header from "@/components/home/header";
+import Footer from "@/components/home/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +20,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={clsx(inter.className, "bg-white text-gray-800")}>
+      <body
+        className={clsx(
+          inter.className,
+          "min-h-screen bg-white text-white font-sans transition-colors duration-500"
+        )}
+      >
+        <Header />
         {children}
+        <Footer />
         <Toaster richColors expand={true} />
       </body>
     </html>
