@@ -1,5 +1,6 @@
 "use client";
 import Book from "@/components/home/book";
+import HomeLayout from "@/components/home/home-layout";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import React, { useEffect } from "react";
@@ -15,19 +16,23 @@ export default function MagazinePage() {
   }, [bookRef]);
 
   return (
-    <main className="px-4 md:px-8 lg:px-48 py-10 grid gap-10 bg-black">
-      <div className="flex flex-col items-center gap-10">
+    <HomeLayout>
+      {/* <main className="px-4 md:px-8 lg:px-48 py-10 grid gap-10 bg-black"> */}
+      <div className="flex flex-col items-center gap-5 xl:gap-10 bg-black py-10">
         <Book ref={bookRef} />
-        <div className="grid grid-cols-4 gap-10 items-stretch">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-10 items-stretch">
           {[...Array(4)].map((_, i) => (
-            <Card className="bg-white rounded-none w-full" key={i}>
-              <CardContent className="w-full p-3">
-                <div className="relative h-[180px] w-[130px]">
+            <Card
+              className="bg-white rounded-none w-full border border-yellow-600"
+              key={i}
+            >
+              <CardContent className="flex w-full flex-shrink-0 p-2">
+                <div className="relative w-40 h-[180px] md:w-[130px]">
                   <Image
-                    src={`/imgs/img4.jpeg`}
+                    src={`/img8.jpeg`}
                     alt="Image Thumbnails"
                     fill
-                    className="rounded-none"
+                    // className="rounded-none"
                   />
                 </div>
               </CardContent>
@@ -35,6 +40,7 @@ export default function MagazinePage() {
           ))}
         </div>
       </div>
-    </main>
+      {/* </main> */}
+    </HomeLayout>
   );
 }

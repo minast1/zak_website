@@ -26,9 +26,8 @@ export default function RootLayout({
           "min-h-screen bg-white text-white font-sans transition-colors duration-500"
         )}
       >
-        <Header />
         {children}
-        <Footer />
+
         <Toaster richColors expand={true} />
       </body>
     </html>
