@@ -1,31 +1,111 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import HTMLFlipBook from "react-pageflip";
+import { Document, Page, pdfjs } from "react-pdf";
+import { Button } from "../ui/button";
+import { BiSolidLeftArrow } from "react-icons/bi";
+import { BiSolidRightArrow } from "react-icons/bi";
+import { useMobile } from "@/hooks/use-mobile";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import "react-pdf/dist/esm/Page/TextLayer.css";
+import clsx from "clsx";
+
+//import pdf from "./ByteBeatJan2024.pdf";
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url
+).toString();
 
 // // eslint-disable-next-line react/display-name
-// const Page = React.forwardRef<HTMLDivElement, React.PropsWithChildren>((props, ref) => {
-//     return (
-//         <div ref={ref} {...props}>
-//             {props.children}
-//         </div>
-//     );
-// })
+
+const PageCover = React.forwardRef<HTMLDivElement, React.PropsWithChildren>(
+  (props, ref) => {
+    return (
+      <div ref={ref} {...props} className="page page-cover" data-density="hard">
+        <div className="page-content">{props.children}</div>
+      </div>
+    );
+  }
+);
+const FlipBookPage = React.forwardRef<HTMLDivElement, React.PropsWithChildren>(
+  (props, ref) => {
+    return (
+      <div ref={ref} {...props} className="page">
+        <div>{props.children}</div>
+      </div>
+    );
+  }
+);
 const Book = React.forwardRef((props, ref) => {
+  const [pageWidth, setPageWidth] = React.useState(400);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const isMobile = useMobile();
+  const [numPages, setNumPages] = React.useState<number | null>(null);
+  const initialPosition = "md:px-auto";
+  const [position, setPosition] = React.useState(initialPosition);
+
   return (
-    <div className="px-4 md:px-8 lg:px-48">
-      <HTMLFlipBook
-        ref={ref}
-        width={500}
-        height={600}
-        maxShadowOpacity={0.5}
-        className="shadow-lg"
-      >
-        <div className="page bg-red-200 p-4">Page 1</div>
-        <div className="page bg-white p-4">Page 2</div>
-        <div className="page bg-white p-4">Page 3</div>
-        <div className="page bg-white p-4">Page 4</div>
-      </HTMLFlipBook>
-    </div>
+    <section
+      className={clsx("md:h-screen w-full bg-black border mx-auto", position)}
+      ref={containerRef}
+    >
+      {/* <div className=" bg-black w-[90%] max-w-5xl h-[500px] flex justify-center items-center shadow-lg rounded">
+        <Button
+          variant={"outline"}
+          size={"icon"}
+          className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full"
+        >
+          <BiSolidLeftArrow />
+        </Button>
+        */}
+      <div>
+        <Document
+          file={`/ByteBeatJan2024.pdf`}
+          onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+        >
+          {numPages && (
+            <HTMLFlipBook
+              width={isMobile ? 400 : 500}
+              onFlip={(e: any) => {
+                //console.log(e.data);
+                if (e.data === 0) {
+                  setPosition(initialPosition);
+                } else {
+                  setPosition("md:pl-44");
+                }
+              }}
+              height={isMobile ? 500 : 700}
+              showCover={true}
+              maxShadowOpacity={0.5}
+              // flippingTime={500}
+              // minWidth={400}
+              //minHeight={500}
+            >
+              {Array.from({ length: numPages }, (_, i) => (
+                <div key={i} className="pdf-page">
+                  <Page
+                    pageNumber={i + 1}
+                    width={isMobile ? 400 : 500}
+                    renderAnnotationLayer={false}
+                    renderTextLayer={false}
+                  />
+                </div>
+              ))}
+            </HTMLFlipBook>
+          )}
+        </Document>
+      </div>
+
+      {/*</section>
+        <Button
+          variant={"outline"}
+          size={"icon"}
+          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full"
+        >
+          <BiSolidRightArrow />
+        </Button>
+      </div> */}
+    </section>
   );
 });
 

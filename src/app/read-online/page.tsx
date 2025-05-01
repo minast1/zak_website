@@ -18,16 +18,16 @@ export default function MagazinePage() {
   return (
     <HomeLayout>
       {/* <main className="px-4 md:px-8 lg:px-48 py-10 grid gap-10 bg-black"> */}
-      <div className="flex flex-col items-center gap-5 xl:gap-10 bg-black py-10">
+      <div className="flex flex-col items-center gap-28 md:gap-20 overflow-hidden bg-black py-10">
         <Book ref={bookRef} />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-10 items-stretch">
+        <div className="flex flex-wrap justify-center gap-5 md:gap-10">
           {[...Array(4)].map((_, i) => (
             <Card
-              className="bg-white rounded-none w-full border border-yellow-600"
+              className="bg-white rounded-none w-[160px] border border-yellow-600"
               key={i}
             >
-              <CardContent className="flex w-full flex-shrink-0 p-2">
-                <div className="relative w-40 h-[180px] md:w-[130px]">
+              <CardContent className="p-2">
+                <div className="relative w-full h-[180px]">
                   <Image
                     src={`/img8.jpeg`}
                     alt="Image Thumbnails"
