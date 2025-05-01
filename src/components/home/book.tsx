@@ -6,16 +6,14 @@ import { Button } from "../ui/button";
 import { BiSolidLeftArrow } from "react-icons/bi";
 import { BiSolidRightArrow } from "react-icons/bi";
 import { useMobile } from "@/hooks/use-mobile";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import "react-pdf/dist/esm/Page/TextLayer.css";
 import clsx from "clsx";
 
 //import pdf from "./ByteBeatJan2024.pdf";
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
-
+// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+//   "pdfjs-dist/build/pdf.worker.min.mjs",
+//   import.meta.url
+// ).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 // // eslint-disable-next-line react/display-name
 
 const PageCover = React.forwardRef<HTMLDivElement, React.PropsWithChildren>(
@@ -46,7 +44,7 @@ const Book = React.forwardRef((props, ref) => {
 
   return (
     <section
-      className={clsx("md:h-screen w-full bg-black border mx-auto", position)}
+      className={clsx("md:h-screen w-full bg-black mx-auto", position)}
       ref={containerRef}
     >
       {/* <div className=" bg-black w-[90%] max-w-5xl h-[500px] flex justify-center items-center shadow-lg rounded">

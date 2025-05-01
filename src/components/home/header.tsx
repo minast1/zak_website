@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import Image from "next/image";
 
 const links: { name: string; href: string }[] = [
   {
@@ -30,16 +31,21 @@ const links: { name: string; href: string }[] = [
 const Header = () => {
   const pathname = usePathname();
   return (
-    <header className="sticky top-0 z-50 bg-black mt-1 flex flex-col items-center py-6 space-y-2 text-center px-4 md:px-8 lg:px-16 shadow-md">
+    <header className="sticky top-0 z-50 bg-black mt-1 flex flex-col items-center py-6 space-y-1 text-center px-4 md:px-8 lg:px-16 shadow-md">
       <div className="w-full flex justify-center items-center">
-        <p className="text-xs tracking-widest uppercase font-semibold">
+        {/* <p className="text-xs tracking-widest uppercase font-semibold">
           ESG | Climate Action | Environmental Sustainability
-        </p>
+        </p> */}
+        <div className="relative w-full md:w-3/5 h-44 md:h-48">
+          <Image
+            src={`/white_logo.png`}
+            alt="White Logo"
+            fill
+            // className="rounded-none"
+          />
+        </div>
       </div>
-      <h1 className="text-4xl md:text-5xl font-bold">
-        SANKOFA
-        <span className="block text-lime-400">SUSTAINABILITY</span>
-      </h1>
+
       {/* Navigation */}
       <nav className="flex flex-wrap justify-center gap-4 mt-6 text-sm md:text-base font-seimibold">
         {links.map((link) => (
@@ -54,13 +60,6 @@ const Header = () => {
             {link.name}
           </Link>
         ))}
-        {/* <a href="#" className={"text-lime-600 font-semibold"}>
-          Home
-        </a>
-        <Link href="#">News</Link>
-        <Link href="#">Read Online</Link>
-        <Link href="#">About Us</Link>
-        <Link href="#">Contact Us</Link> */}
       </nav>
     </header>
   );
