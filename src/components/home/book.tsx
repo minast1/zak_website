@@ -8,11 +8,6 @@ import { BiSolidRightArrow } from "react-icons/bi";
 import { useMobile } from "@/hooks/use-mobile";
 import clsx from "clsx";
 
-//import pdf from "./ByteBeatJan2024.pdf";
-// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-//   "pdfjs-dist/build/pdf.worker.min.mjs",
-//   import.meta.url
-// ).toString();
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 // // eslint-disable-next-line react/display-name
 

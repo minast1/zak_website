@@ -16,8 +16,8 @@ const links: { name: string; href: string }[] = [
     href: "#",
   },
   {
-    name: "Read Online",
-    href: "/read-online",
+    name: "Magazine",
+    href: "/magazine",
   },
   {
     name: "About Us",
