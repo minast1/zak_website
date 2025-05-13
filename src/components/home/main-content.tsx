@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import RichTextEditor from "reactjs-tiptap-editor";
 import Image from "next/image";
 import { Post } from "@/lib/types/types";
-import useSanitizedHtml from "@/hooks/useSanitizedHtml";
+import DOMPurify from "isomorphic-dompurify";
 
 type TProps = {
   posts: Post[];
@@ -72,7 +72,7 @@ const MainContent = ({ posts }: TProps) => {
                   <div
                     className="text-xs line-clamp-5"
                     dangerouslySetInnerHTML={{
-                      __html: useSanitizedHtml(post.content),
+                      __html: DOMPurify.sanitize(post.content),
                     }}
                   />
 
