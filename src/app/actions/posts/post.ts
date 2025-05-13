@@ -170,7 +170,7 @@ export const updatePost = actionClient
 
 export const fetchPosts = async () => {
   const postsRef = db.collection("posts");
-  const snapshot = await postsRef.orderBy("createdAt", "desc").get();
+  const snapshot = await postsRef.orderBy("createdAt", "desc").limit(4).get();
   const posts = snapshot.docs.map((doc) => doc.data());
   interface GetReturnType {
     id: string;

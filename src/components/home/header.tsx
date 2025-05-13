@@ -30,13 +30,14 @@ const links: { name: string; href: string }[] = [
 ];
 const Header = () => {
   const pathname = usePathname();
+  //sticky top-0 z-50
   return (
-    <header className="sticky top-0 z-50 bg-black mt-1 flex flex-col items-center py-6 space-y-1 text-center px-4 md:px-8 lg:px-16 shadow-md">
+    <header className="bg-black mt-1 flex flex-col items-center py-6 space-y-1 text-center px-4 md:px-8 lg:px-16 shadow-md">
       <div className="w-full flex justify-center items-center">
         {/* <p className="text-xs tracking-widest uppercase font-semibold">
           ESG | Climate Action | Environmental Sustainability
         </p> */}
-        <div className="relative w-full md:w-3/5 h-44 md:h-48">
+        <div className="relative w-full md:w-1/2 h-44 md:h-48">
           <Image
             src={`/white_logo.png`}
             alt="White Logo"

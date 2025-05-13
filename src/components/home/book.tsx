@@ -39,18 +39,9 @@ const Book = React.forwardRef((props, ref) => {
 
   return (
     <section
-      className={clsx("md:h-screen w-full bg-black mx-auto", position)}
+      className={clsx("md:h-screen w-screen bg-black mx-auto", position)}
       ref={containerRef}
     >
-      {/* <div className=" bg-black w-[90%] max-w-5xl h-[500px] flex justify-center items-center shadow-lg rounded">
-        <Button
-          variant={"outline"}
-          size={"icon"}
-          className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full"
-        >
-          <BiSolidLeftArrow />
-        </Button>
-        */}
       <div>
         <Document
           file={`/ByteBeatJan2024.pdf`}
@@ -88,16 +79,6 @@ const Book = React.forwardRef((props, ref) => {
           )}
         </Document>
       </div>
-
-      {/*</section>
-        <Button
-          variant={"outline"}
-          size={"icon"}
-          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full"
-        >
-          <BiSolidRightArrow />
-        </Button>
-      </div> */}
     </section>
   );
 });
