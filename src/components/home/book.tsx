@@ -11,7 +11,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 pdfjs.GlobalWorkerOptions.workerSrc =
   process.env.NODE_ENV === "production"
-    ? `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
+    ? `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`
     : new URL(
         "pdfjs-dist/build/pdf.worker.min.mjs",
         import.meta.url
