@@ -56,7 +56,7 @@ const MainContent = ({ posts }: TProps) => {
                 <div className="md:h-52 flex-shrink-0 sm:w-40 h-[340px] relative">
                   <Image
                     //src={`https://storage.googleapis.com/posts/${post.image}`}
-                    src={"/imgs/img8.jpeg"}
+                    src={"/img8.jpeg"}
                     alt={`image_${post.id}`}
                     fill
                   />

@@ -21,7 +21,7 @@ const links: { name: string; href: string }[] = [
   },
   {
     name: "About Us",
-    href: "#",
+    href: "/about-us",
   },
   {
     name: "Contact Us",
