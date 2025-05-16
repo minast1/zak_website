@@ -9,16 +9,19 @@ import { useMobile } from "@/hooks/use-mobile";
 import clsx from "clsx";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
-pdfjs.GlobalWorkerOptions.workerSrc =
-  process.env.NODE_ENV === "production"
-    ? `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
-    : new URL(
-        "pdfjs-dist/build/pdf.worker.min.mjs",
-        import.meta.url
-      ).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url
+).toString();
+// process.env.NODE_ENV === "production"
+//   ? `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
+//   : new URL(
+//       "pdfjs-dist/build/pdf.worker.min.mjs",
+//       import.meta.url
+//     ).toString();
 // eslint-disable-next-line react/display-name
 
-const Book = () => {
+const Book = ({ file }: { file: string }) => {
   const [pageWidth, setPageWidth] = React.useState(400);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const isIphoneSE = useMediaQuery("(max-width: 375px)");
@@ -41,7 +44,7 @@ const Book = () => {
     >
       <div className="w-full">
         <Document
-          file={`/issue_01.pdf`}
+          file={file}
           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
         >
           {numPages && (

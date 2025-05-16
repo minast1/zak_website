@@ -24,7 +24,7 @@ export default function MagazinePage() {
     <HomeLayout>
       {/* <main className="px-4 md:px-8 lg:px-48 py-10 grid gap-10 bg-black"> */}
       <div className="bg-black py-10">
-        <Book />
+        <Book file={`/issue_01.pdf`} />
         <div className="flex flex-wrap justify-center gap-5 md:gap-10 mt-10">
           {[...Array(4)].map((_, i) => (
             <Card
