@@ -22,7 +22,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 // eslint-disable-next-line react/display-name
 
 const Book = ({ file }: { file: string }) => {
-  const [pageWidth, setPageWidth] = React.useState(400);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const isIphoneSE = useMediaQuery("(max-width: 375px)");
   const isIphoneXR = useMediaQuery("(max-width: 414px)");
@@ -34,14 +33,15 @@ const Book = ({ file }: { file: string }) => {
 
   const isMobile = useMobile();
   const [numPages, setNumPages] = React.useState<number | null>(null);
+  const [currentPage, setCurrentPage] = React.useState(0);
+  const flipBookRef = React.useRef<HTMLDivElement>(null);
   const initialPosition = "md:px-auto";
   const [position, setPosition] = React.useState(initialPosition);
+  const isPageVisible = (pageIndex: number) =>
+    Math.abs(pageIndex - currentPage) <= 4;
 
   return (
-    <section
-      className={clsx(" w-screen bg-black", position)}
-      ref={containerRef}
-    >
+    <section className={clsx(" w-screen bg-black", position)}>
       <div className="w-full">
         <Document
           file={file}
@@ -49,7 +49,7 @@ const Book = ({ file }: { file: string }) => {
         >
           {numPages && (
             <HTMLFlipBook
-              // width={isMobile ? 400 : 500}
+              ref={flipBookRef}
               width={550}
               height={733}
               size={isMobile ? "stretch" : "fixed"}
@@ -60,58 +60,63 @@ const Book = ({ file }: { file: string }) => {
               onFlip={(e: any) => {
                 //console.log(e.data);
                 if (e.data === 0) {
+                  setCurrentPage(e.data);
                   setPosition(initialPosition);
                 } else {
+                  setCurrentPage(e.data);
                   setPosition("md:pl-44");
                 }
               }}
               showCover={true}
               maxShadowOpacity={0.5}
-              // flippingTime={500}
-              // minWidth={400}
-              //minHeight={500}
             >
               {Array.from({ length: numPages }, (_, i) => (
                 <div key={i} className="pdf-page">
-                  <Page
-                    pageNumber={i + 1}
-                    width={
-                      isIphoneSE
-                        ? 372
-                        : isIphoneXR
-                        ? 410
-                        : isIphone12Pro
-                        ? 390
-                        : isIphone14ProMax
-                        ? 430
-                        : isGalaxyS8
-                        ? 350
-                        : isGalaxyS20
-                        ? 412
-                        : isIpadMini
-                        ? 600
-                        : 550
-                    }
-                    height={
-                      isIphoneSE
-                        ? 600
-                        : isIphoneXR
-                        ? 600
-                        : isIphone12Pro
-                        ? 600
-                        : isIphone14ProMax
-                        ? 600
-                        : isGalaxyS8
-                        ? 550
-                        : isGalaxyS20
-                        ? 600
-                        : isIpadMini
-                        ? 800
-                        : 700
-                    }
-                    renderAnnotationLayer={false}
-                    renderTextLayer={false}
-                  />
+                  {isPageVisible(i) ? (
+                    <Page
+                      pageNumber={i + 1}
+                      width={
+                        isIphoneSE
+                          ? 372
+                          : isIphoneXR
+                          ? 410
+                          : isIphone12Pro
+                          ? 390
+                          : isIphone14ProMax
+                          ? 430
+                          : isGalaxyS8
+                          ? 350
+                          : isGalaxyS20
+                          ? 412
+                          : isIpadMini
+                          ? 600
+                          : 550
+                      }
+                      height={
+                        isIphoneSE
+                          ? 600
+                          : isIphoneXR
+                          ? 600
+                          : isIphone12Pro
+                          ? 600
+                          : isIphone14ProMax
+                          ? 600
+                          : isGalaxyS8
+                          ? 550
+                          : isGalaxyS20
+                          ? 600
+                          : isIpadMini
+                          ? 800
+                          : 700
+                      }
+                      renderAnnotationLayer={false}
+                      renderTextLayer={false}
+                    />
+                  ) : (
+                    <div className="flex justify-center items-center w-full">
+                      Loading...
+                    </div>
+                  )}
                 </div>
               ))}
             </HTMLFlipBook>
