@@ -64,7 +64,7 @@ const Book = ({ file }: { file: string }) => {
                   setPosition(initialPosition);
                 } else {
                   setCurrentPage(e.data);
-                  setPosition("md:pl-44");
+                  setPosition("md:pl-40");
                 }
               }}
               showCover={true}

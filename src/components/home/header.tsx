@@ -37,7 +37,7 @@ const Header = () => {
         {/* <p className="text-xs tracking-widest uppercase font-semibold">
           ESG | Climate Action | Environmental Sustainability
         </p> */}
-        <div className="relative w-full md:w-1/2 h-44 md:h-48">
+        <div className="relative w-full md:w-2/5 h-40 md:h-48">
           <Image
             src={`/white_logo.png`}
             alt="White Logo"
