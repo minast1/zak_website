@@ -11,7 +11,7 @@ const teamMembers = [
   {
     name: "Ama Kofi",
     role: "Founder & Director",
-    image: "/images/ama-kofi.jpg",
+    image: "/alan.jpeg",
     bio: "Ama leads with a passion for environmental justice and cultural sustainability. With roots in both urban agriculture and policy, she bridges grassroots action and systemic change.",
     social: {
       twitter: "https://twitter.com/ama_kofi",
@@ -22,7 +22,7 @@ const teamMembers = [
   {
     name: "Kwame Mensah",
     role: "Education Coordinator",
-    image: "/images/kwame-mensah.jpg",
+    image: "/bawumia.jpg",
     bio: "Kwame designs and delivers workshops for youth and adults, focusing on indigenous knowledge, climate science, and hands-on learning.",
     social: {
       twitter: "https://twitter.com/kwamemensah",
@@ -33,7 +33,7 @@ const teamMembers = [
   {
     name: "Nia Johnson",
     role: "Community Outreach Lead",
-    image: "/images/nia-johnson.jpg",
+    image: "/cheddar.jpeg",
     bio: "Nia connects our work to the community, building relationships with local partners and organizing impactful events.",
     social: {
       twitter: "https://twitter.com/niajohnson",
@@ -98,7 +98,7 @@ const AboutUsContent = ({ posts }: TProps) => {
                 {teamMembers.map((member, index) => (
                   <motion.div
                     key={index}
-                    className="bg-white shadow-lg rounded-2xl overflow-hidden transform transition duration-300 hover:scale-105"
+                    className="bg-black text-white shadow-lg rounded-2xl overflow-hidden transform transition duration-300 hover:scale-105"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 + index * 0.2, duration: 0.5 }}
@@ -145,10 +145,12 @@ const AboutUsContent = ({ posts }: TProps) => {
           >
             <Card className="bg-black text-gray-400 border-none">
               <CardContent className="flex flex-col sm:flex-row gap-4 p-2 pb-5 border-b border-b-gray-500">
-                <div className="md:h-40 flex-shrink-0 w-full sm:w-32 h-[300px]  relative">
+                <div className="md:h-36 flex-shrink-0 w-full sm:w-32 h-[300px]  relative">
                   <Image
                     //src={`https://storage.googleapis.com/posts/${post.image}`}
-                    src={"/img8.jpeg"}
+                    src={`/posts/${
+                      i == 0 ? "politics.jpeg" : i == 1 ? "FDA.jpg" : "ecg.jpeg"
+                    }`}
                     alt={`image_${post.id}`}
                     fill
                   />
@@ -162,7 +164,7 @@ const AboutUsContent = ({ posts }: TProps) => {
                     Reporter Name - News Source
                   </p>
                   <div
-                    className="text-xs line-clamp-5"
+                    className="text-xs line-clamp-3"
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(post.content),
                     }}

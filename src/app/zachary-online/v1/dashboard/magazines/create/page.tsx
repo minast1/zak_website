@@ -14,7 +14,9 @@ const CreateMagazine = () => {
               Add New Magazine
             </CardTitle>
             <Button size={"sm"} asChild className="max-w-fit">
-              <Link href="/zachary-online/v1/dashboard">Back to Posts</Link>
+              <Link href="/zachary-online/v1/dashboard/magazines">
+                Back to Magazines
+              </Link>
             </Button>
           </CardHeader>
           <CardContent>

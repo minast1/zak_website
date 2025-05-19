@@ -9,7 +9,9 @@ export async function TotalPostsCard() {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-sm font-medium">Total Posts</CardTitle>
+        <CardTitle className="text-sm font-medium">
+          Total Published Posts
+        </CardTitle>
         <NotebookPen className="w-4 h-4 text-muted-foreground" />
       </CardHeader>
       <CardContent>

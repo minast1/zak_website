@@ -113,7 +113,7 @@ export const createPost = actionClient
           label: label ? label : "",
           image: filename,
         };
-        await db.collection("posts").doc(filename).set(post);
+        await db.collection("posts").doc().set(post); //removed filename as document id
         revalidatePath("/");
       } catch (error) {
         console.error("Error saving post to database", error);

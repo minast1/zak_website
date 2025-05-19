@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Post } from "@/lib/types/types";
 import DOMPurify from "isomorphic-dompurify";
+import Link from "next/link";
 
 type TProps = {
   posts: Post[];
@@ -35,14 +36,20 @@ const MainContent = ({ posts }: TProps) => {
 
         <Button
           size={"sm"}
+          asChild
           className="bg-white text-black font-semibold w-fit-content hover:bg-gray/30"
         >
-          Read Online
+          <Link href="/magazine">Read Online</Link>
         </Button>
       </motion.div>
 
       {/* Right Column - News Highlights */}
       <div className="flex flex-col gap-8">
+        <div className="w-full border-b-2 border-blue-600">
+          <div className="w-36 px-5 h-10 bg-blue-600 clip-slant-right font-semibold text-white flex items-center">
+            Recent Posts
+          </div>
+        </div>
         {posts.map((post, i) => (
           <motion.div
             key={post.id}
@@ -52,10 +59,12 @@ const MainContent = ({ posts }: TProps) => {
           >
             <Card className="bg-black text-gray-400 border-none">
               <CardContent className="flex flex-col sm:flex-row gap-4 p-2 ">
-                <div className="md:h-52 flex-shrink-0 sm:w-40 h-[340px] relative">
+                <div className="md:h-40 lg:h-40 flex-shrink-0 sm:w-40 h-[340px] relative">
                   <Image
                     //src={`https://storage.googleapis.com/posts/${post.image}`}
-                    src={"/img8.jpeg"}
+                    src={`/posts/${
+                      i == 0 ? "politics.jpeg" : i == 1 ? "FDA.jpg" : "ecg.jpeg"
+                    }`}
                     alt={`image_${post.id}`}
                     fill
                   />
@@ -69,7 +78,7 @@ const MainContent = ({ posts }: TProps) => {
                     Reporter Name - News Source
                   </p>
                   <div
-                    className="text-xs line-clamp-5"
+                    className="text-xs line-clamp-3"
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(post.content),
                     }}

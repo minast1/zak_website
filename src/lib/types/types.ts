@@ -15,3 +15,10 @@ export interface Post {
   label: string;
   image: string;
 }
+
+export interface Magazine {
+  id: string;
+  coverImage: string;
+  pdf: string;
+  createdAt: string;
+}
