@@ -8,7 +8,7 @@ import { FaRegFolderOpen } from "react-icons/fa";
 import { Magazine } from "@/lib/types/types";
 import { FcOpenedFolder } from "react-icons/fc";
 
-export async function MagazinesPage() {
+export default async function MagazinesPage() {
   const magazines = await fetchMagazines();
   return (
     <main className="space-y-10">
@@ -62,5 +62,3 @@ export async function MagazinesPage() {
     </main>
   );
 }
-
-export default MagazinesPage;
